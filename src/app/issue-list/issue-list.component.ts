@@ -1,14 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Issue} from "../issue";
-import {NgForOf} from "@angular/common";
+import {JsonPipe, NgForOf} from "@angular/common";
 import {StatusFilterComponent} from "../status-filter/status-filter.component";
+import {NewIssueComponent} from "../new-issue/new-issue.component";
 
 @Component({
   selector: 'app-issue-list',
   standalone: true,
   imports: [
     NgForOf,
-    StatusFilterComponent
+    StatusFilterComponent,
+    JsonPipe,
+    NewIssueComponent
   ],
   templateUrl: './issue-list.component.html',
   styleUrl: './issue-list.component.css'
@@ -30,6 +33,7 @@ export class IssueListComponent implements  OnInit {
   ]
   status : string = 'DONE';
   filteredeIssues : Issue[] = []
+  selectedIssue : Issue | null = null
   ngOnInit() {
     this.filterIssue()
   }
