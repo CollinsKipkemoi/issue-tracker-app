@@ -9,10 +9,11 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class StatusFilterComponent {
   @Input() status : string = 'ALL';
-  @Output() change = new EventEmitter<string>()
+  @Output() statusChange = new EventEmitter<string>()
   // the input decorator is used to pass data from parent component to child component
   changeStatus(newStatus : string) : void {
-    this.change.emit(newStatus)
+    this.status = newStatus;
+    this.statusChange.emit(newStatus)
   }
 
 }
