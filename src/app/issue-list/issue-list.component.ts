@@ -3,6 +3,7 @@ import {Issue} from "../issue";
 import {JsonPipe, NgForOf} from "@angular/common";
 import {StatusFilterComponent} from "../status-filter/status-filter.component";
 import {NewIssueComponent} from "../new-issue/new-issue.component";
+import {IssueFormComponent} from "../issue-form/issue-form.component";
 
 @Component({
   selector: 'app-issue-list',
@@ -11,7 +12,8 @@ import {NewIssueComponent} from "../new-issue/new-issue.component";
     NgForOf,
     StatusFilterComponent,
     JsonPipe,
-    NewIssueComponent
+    NewIssueComponent,
+    IssueFormComponent
   ],
   templateUrl: './issue-list.component.html',
   styleUrl: './issue-list.component.css'
@@ -42,8 +44,19 @@ export class IssueListComponent implements  OnInit {
     this.filteredeIssues = this.status === 'ALL' ? this.issues : this.issues.filter(issue => issue.status === this.status)
   }
 
+  selectIssue(issue: Issue) : void {
+    this.selectedIssue = issue;
+  }
+
   handleChangeStatus(newStatus : string) : void {
     this.status = newStatus
     this.filterIssue()
+  }
+
+  handleSave(issue: Issue) : void {
+    if(this.selectedIssue != null){
+      Object.assign(this.selectedIssue, issue)
+    }
+    this.selectedIssue = null
   }
 }

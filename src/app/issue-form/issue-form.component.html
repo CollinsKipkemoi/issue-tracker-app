@@ -1,0 +1,65 @@
+{{ issue| json }}
+{{ issueForm.value | json }}
+<form (ngSubmit) = "handleSubmit()" [formGroup]="issueForm" action="" novalidate>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      [value]="issue.title"
+      formControlName="title"
+      [class.is-valid]="title?.valid"
+      [class.is-invalid]="title?.invalid && (title?.dirty || title?.touched)"
+      type="text"
+      class="form-control"
+      id="title"
+      placeholder="Title"
+      required
+    />
+    <div class="invalid-feedback">Please provide a title!</div>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+      [class.is-valid]="description?.valid"
+      [class.is-invalid]="description?.invalid && (description?.dirty || description?.touched)"
+      formControlName="description"
+      class="form-control"
+      id="description"
+      rows="5"
+      required
+    ></textarea>
+    <div class="invalid-feedback">Please provide a description!</div>
+  </div>
+  <div class="form-group">
+    <label for="place">Place</label>
+    <input
+      [class.is-valid]="place?.valid"
+      [class.is-invalid]="place?.invalid && (place?.dirty || place?.touched)"
+      formControlName="place"
+      type="text"
+      class="form-control"
+      id="place"
+      placeholder="Place"
+      required
+    />
+<!--    @if (place?.invalid && place?.errors['required']) {-->
+<!--      <div class="invalid-feedback">Please provide an issue place!</div>-->
+<!--    }-->
+<!--    @if(place?.invalid && place?.errors.pattern) {-->
+<!--      <div class="invalid-feedback">Place must start with PC...!</div>-->
+<!--    }-->
+  </div>
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select formControlName="status"
+            [class.is-valid]="status?.valid"
+            [class.is-invalid]="status?.invalid && (status?.dirty || status?.touched)"
+            class="form-control" id="status" required>
+      <option value="NEW">New</option>
+      <option value="DOING">Doing</option>
+      <option value="DONE">Done</option>
+    </select>
+    <div class="invalid-feedback">Please provide a status!</div>
+  </div>
+
+  <button [disabled]="issueForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+</form>
