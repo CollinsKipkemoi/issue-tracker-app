@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Issue} from "../issue";
-import {JsonPipe, NgForOf} from "@angular/common";
-import {StatusFilterComponent} from "../status-filter/status-filter.component";
-import {NewIssueComponent} from "../new-issue/new-issue.component";
-import {IssueFormComponent} from "../issue-form/issue-form.component";
+import { Component, OnInit } from '@angular/core';
+import { Issue } from "../issue";
+import { JsonPipe, NgForOf } from "@angular/common";
+import { StatusFilterComponent } from "../status-filter/status-filter.component";
+import { NewIssueComponent } from "../new-issue/new-issue.component";
+import { IssueFormComponent } from "../issue-form/issue-form.component";
+import {IssueService} from "../issue.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-issue-list',
@@ -13,48 +15,41 @@ import {IssueFormComponent} from "../issue-form/issue-form.component";
     StatusFilterComponent,
     JsonPipe,
     NewIssueComponent,
-    IssueFormComponent
+    IssueFormComponent,
+    RouterLink
   ],
   templateUrl: './issue-list.component.html',
   styleUrl: './issue-list.component.css'
 })
-export class IssueListComponent implements  OnInit {
-  issues: Issue[] = [
-    {
-      id: 1, title: 'Title1', description: 'Desc1', place: 'PCLab1', status: 'NEW'
-    },
-    {
-      id: 2, title: 'Title2', description: 'Desc2', place: 'PCLab2', status: 'DOING'
-    },
-    {
-      id: 3, title: 'Title3', description: 'Desc3', place: 'PCLab3', status: 'DONE'
-    },
-    {
-      id: 4, title: 'Title4', description: 'Desc4', place: 'PCLab4', status: 'NEW'
-    }
-  ]
-  status : string = 'DONE';
-  filteredeIssues : Issue[] = []
-  selectedIssue : Issue | null = null
+export class IssueListComponent implements OnInit {
+
+  status: string = 'DONE';
+  filteredeIssues: Issue[] = []
+  selectedIssue: Issue | null = null
+  issues : Issue[] = []
+
+constructor(private issueService: IssueService) {
+}
   ngOnInit() {
+    this.issues = this.issueService.getIssues()
     this.filterIssue()
   }
 
-  filterIssue(){
+  filterIssue() {
     this.filteredeIssues = this.status === 'ALL' ? this.issues : this.issues.filter(issue => issue.status === this.status)
   }
 
-  selectIssue(issue: Issue) : void {
+  selectIssue(issue: Issue): void {
     this.selectedIssue = issue;
   }
 
-  handleChangeStatus(newStatus : string) : void {
+  handleChangeStatus(newStatus: string): void {
     this.status = newStatus
     this.filterIssue()
   }
 
-  handleSave(issue: Issue) : void {
-    if(this.selectedIssue != null){
+  handleSave(issue: Issue): void {
+    if (this.selectedIssue != null) {
       Object.assign(this.selectedIssue, issue)
     }
     this.selectedIssue = null

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {IssueService} from "../issue.service";
+import {Issue} from "../issue";
 
 @Component({
   selector: 'app-detail',
@@ -9,4 +12,12 @@ import { Component } from '@angular/core';
 })
 export class DetailComponent {
 
+  issue : Issue | undefined = new Issue();
+  constructor(private issueService : IssueService, private route: ActivatedRoute) {
+  }
+
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.issue = this.issueService.getIssueById(Number(id));
+  }
 }

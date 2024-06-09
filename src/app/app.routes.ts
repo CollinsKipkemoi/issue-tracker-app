@@ -20,5 +20,9 @@ export const routes: Routes = [
   {
     path: 'issues',
     component: IssueListComponent
+  },
+  {
+    path : "detail",
+    component : DetailComponent
   }
 ];

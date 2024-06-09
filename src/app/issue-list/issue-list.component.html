@@ -12,6 +12,7 @@
         [class.list-group-item-warning]="issue.status === 'DOING'"
         [class.list-group-item-success]="issue.status === 'DONE'"
         (click)="selectIssue(issue)"
+        [routerLink]="['/issue', issue.id]"
       >
         <div class="d-flex w-100 justify-content-between align-items-center">
           <h5 class="mb-1">{{ issue.title }}</h5>
@@ -33,11 +34,11 @@
       </a>
 
     </div>
-    @if (selectedIssue) {
-      <div class="col">
-        <app-issue-form [issue] = "selectedIssue" (save)="handleSave($event)" ></app-issue-form>
-      </div>
-    }
+<!--    @if (selectedIssue) {-->
+<!--      <div class="col">-->
+<!--        <app-issue-form [issue] = "selectedIssue" (save)="handleSave($event)" ></app-issue-form>-->
+<!--      </div>-->
+<!--    }-->
   </div>
 
 </div>
