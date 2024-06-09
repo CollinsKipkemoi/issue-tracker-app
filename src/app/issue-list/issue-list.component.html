@@ -1,6 +1,6 @@
 <div class="container">
   <h2 class="display-2 my-3">My issues</h2>
-  <p><a class="btn btn-primary" href="#" role="button">New issue</a></p>
+  <p><a class="btn btn-primary" routerLink="/issues/new" role="button">New issue</a></p>
   <app-status-filter [(status)]="status" (statusChange)="handleChangeStatus($event)"></app-status-filter>
 
   <div class="row">

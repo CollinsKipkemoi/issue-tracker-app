@@ -30,4 +30,9 @@ export class IssueService {
   getIssueById(id: number) : Issue | undefined{
     return this.issues.find(issue => issue.id === id)
   }
+
+  addIssue(issue: Issue): void {
+    issue.id = this.issues.length + 1
+    this.issues.push(issue)
+  }
 }

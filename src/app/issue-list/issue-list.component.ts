@@ -23,7 +23,7 @@ import {RouterLink} from "@angular/router";
 })
 export class IssueListComponent implements OnInit {
 
-  status: string = 'DONE';
+  status: string = 'ALL';
   filteredeIssues: Issue[] = []
   selectedIssue: Issue | null = null
   issues : Issue[] = []
