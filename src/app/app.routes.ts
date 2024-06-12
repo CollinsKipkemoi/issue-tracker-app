@@ -6,8 +6,8 @@ import {MainComponent} from "./main/main.component";
 
 export const routes: Routes = [
   {
-    path : "",
-    component : MainComponent
+    path: "",
+    component: MainComponent
   },
   {
     path: 'issue/:id',
@@ -22,7 +22,10 @@ export const routes: Routes = [
     component: IssueListComponent
   },
   {
-    path : "detail",
-    component : DetailComponent
+    path: "detail",
+    component: DetailComponent
+  }, {
+    path: "issues/:id/edit",
+    component: NewIssueComponent
   }
 ];

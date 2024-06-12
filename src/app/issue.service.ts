@@ -35,4 +35,11 @@ export class IssueService {
     issue.id = this.issues.length + 1
     this.issues.push(issue)
   }
+
+  modifyIssue(issue: Issue): void {
+    const _issue = this.issues.find(issue => issue.id === issue.id)
+    if(_issue) {
+      Object.assign(_issue, issue)
+    }
+  }
 }

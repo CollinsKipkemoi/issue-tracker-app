@@ -48,10 +48,4 @@ constructor(private issueService: IssueService) {
     this.filterIssue()
   }
 
-  handleSave(issue: Issue): void {
-    if (this.selectedIssue != null) {
-      Object.assign(this.selectedIssue, issue)
-    }
-    this.selectedIssue = null
-  }
 }
